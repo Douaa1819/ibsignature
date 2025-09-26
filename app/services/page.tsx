@@ -2,6 +2,7 @@
 
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { 
   ConciergeBell, 
   Home, 
@@ -26,77 +27,114 @@ import {
 // --- Données des services (extraites du PDF) ---
 const mainServices = [
   {
-    title: "Conciergerie Airbnb",
-    description: "Service complet qui prend soin de vos voyageurs, gère votre propriété et augmente vos revenus, sans aucun effort de votre part.",
+    title: "Airbnb Concierge",
+    description: "Complete service that takes care of your travelers, manages your property and increases your revenue, without any effort on your part.",
     icon: ConciergeBell,
     imageSrc: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    features: ["Accueil personnalisé", "Support 24/7", "Communication multilingue"]
+    features: ["Personalized welcome", "24/7 support", "Multilingual communication"]
   },
   {
-    title: "Gestion Complète de Propriété",
-    description: "De la réservation au départ, nous gérons chaque étape de A à Z pour une tranquillité d'esprit totale.",
+    title: "Complete Property Management",
+    description: "From booking to departure, we manage every step from A to Z for total peace of mind.",
     icon: Home,
     imageSrc: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    features: ["Gestion des réservations", "Check-in/Check-out", "Maintenance préventive"]
+    features: ["Booking management", "Check-in/Check-out", "Preventive maintenance"]
   },
   {
-    title: "Optimisation des Revenus",
-    description: "Augmentez vos revenus de 30% en moyenne grâce à nos stratégies de tarification dynamique et d'optimisation.",
+    title: "Revenue Optimization",
+    description: "Increase your revenue by 30% on average thanks to our dynamic pricing and optimization strategies.",
     icon: TrendingUp,
     imageSrc: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    features: ["Tarification dynamique", "Analyse de marché", "Stratégies personnalisées"]
+    features: ["Dynamic pricing", "Market analysis", "Personalized strategies"]
   },
   {
-    title: "Maintenance & Nettoyage",
-    description: "Nous assurons la propreté impeccable et la maintenance régulière pour préserver et améliorer la valeur de votre bien.",
+    title: "Maintenance & Cleaning",
+    description: "We ensure impeccable cleanliness and regular maintenance to preserve and improve the value of your property.",
     icon: Wrench,
     imageSrc: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    features: ["Nettoyage professionnel", "Maintenance technique", "Inspection régulière"]
+    features: ["Professional cleaning", "Technical maintenance", "Regular inspection"]
   },
 ];
 
 // --- Services détaillés ---
 const detailedServices = [
-  { icon: Camera, title: "Photographie Professionnelle", description: "Photos haute qualité pour optimiser vos annonces" },
-  { icon: Wifi, title: "Installation Technologique", description: "Smart locks, WiFi, équipements modernes" },
-  { icon: MessageCircle, title: "Communication Client", description: "Gestion complète des messages et demandes" },
-  { icon: Calendar, title: "Gestion du Planning", description: "Optimisation du calendrier et des disponibilités" },
-  { icon: CreditCard, title: "Gestion Financière", description: "Suivi des paiements et reporting détaillé" },
-  { icon: Shield, title: "Assurance & Protection", description: "Couverture complète et gestion des sinistres" }
+  { icon: Camera, title: "Professional Photography", description: "High-quality photos to optimize your listings" },
+  { icon: Wifi, title: "Technology Installation", description: "Smart locks, WiFi, modern equipment" },
+  { icon: MessageCircle, title: "Client Communication", description: "Complete management of messages and requests" },
+  { icon: Calendar, title: "Schedule Management", description: "Calendar and availability optimization" },
+  { icon: CreditCard, title: "Financial Management", description: "Payment tracking and detailed reporting" },
+  { icon: Shield, title: "Insurance & Protection", description: "Complete coverage and claims management" }
 ];
 
 // --- Données des avantages ---
 const benefits = [
   {
     icon: BarChart2,
-    title: "Croissance Prouvée des Revenus",
-    description: "Nos clients voient en moyenne une augmentation de 30% de leurs revenus locatifs grâce à notre expertise.",
+    title: "Proven Revenue Growth",
+    description: "Our clients see on average a 30% increase in their rental income thanks to our expertise.",
     stat: "+30%"
   },
   {
     icon: Clock,
-    title: "Tranquillité d'Esprit Totale",
-    description: "Concentrez-vous sur vos priorités pendant que nous gérons chaque aspect de votre propriété 24/7.",
+    title: "Total Peace of Mind",
+    description: "Focus on your priorities while we manage every aspect of your property 24/7.",
     stat: "24/7"
   },
   {
     icon: Sparkles,
-    title: "Expérience Client Premium",
-    description: "Un service exceptionnel qui génère des évaluations élevées et des réservations répétées.",
+    title: "Premium Client Experience",
+    description: "Exceptional service that generates high ratings and repeat bookings.",
     stat: "4.9★"
   },
   {
     icon: ShieldCheck,
-    title: "Protection de la Propriété",
-    description: "Un entretien complet qui préserve et améliore la valeur de votre investissement sur le long terme.",
+    title: "Property Protection",
+    description: "Complete maintenance that preserves and improves the value of your investment in the long term.",
     stat: "100%"
   },
 ];
 
+// --- Composants ---
+const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+  <a href={href} className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300">
+    {children}
+  </a>
+);
+
 // --- Composant de la page ---
 const ServicesPage: NextPage = () => {
   return (
-    <div className="bg-[#0d111e] text-white min-h-screen font-sans">
+    <div className="bg-[#0d111e] text-white min-h-screen font-sans overflow-x-hidden">
+      {/* --- Header --- */}
+      <motion.header 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="sticky top-0 bg-[#0d111e]/95 backdrop-blur-md z-50 border-b border-gray-800/50"
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Home className="h-6 w-6 sm:h-7 sm:w-7 text-pink-500" />
+              <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">IB Signature</span>
+            </div>
+            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+              <NavLink href="/">Home</NavLink>
+              <NavLink href="/about">About</NavLink>
+              <NavLink href="/services">Services</NavLink>
+              <NavLink href="/contact">Contact</NavLink>
+            </nav>
+            <a
+              href="#"
+              className="px-4 py-2 sm:px-6 sm:py-2.5 bg-gradient-to-r from-[#ff4d6d] to-pink-600 text-white text-sm sm:text-base font-semibold rounded-full hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 transform hover:scale-105"
+            >
+              <span className="hidden sm:inline">Become a Host</span>
+              <span className="sm:hidden">Join</span>
+            </a>
+          </div>
+        </div>
+      </motion.header>
+
       <main className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* --- Hero Section --- */}
@@ -112,26 +150,26 @@ const ServicesPage: NextPage = () => {
           <div className="relative z-20 flex flex-col items-center gap-6 max-w-4xl">
             <div className="inline-flex items-center gap-2 bg-pink-500/10 border border-pink-500/20 rounded-full px-4 py-2 text-pink-400 text-sm font-medium mb-4">
               <Sparkles className="h-4 w-4" />
-              Services Premium
+              Premium Services
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
-              Nos <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">Services</span>
+              Our <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">Services</span>
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl leading-relaxed">
-              Nous offrons une gamme complète de services pour optimiser la gestion de votre propriété et maximiser vos revenus locatifs.
+              We offer a complete range of services to optimize the management of your property and maximize your rental income.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4 sm:mt-6">
               <a
                 href="#services-grid"
                 className="px-8 py-4 bg-gradient-to-r from-[#ff4d6d] to-pink-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-pink-500/25 transition-all transform hover:scale-105"
               >
-                Découvrir nos services
+                Discover our services
               </a>
               <a
                 href="/contact"
                 className="px-8 py-4 border border-gray-600 text-white font-semibold rounded-full hover:bg-white/5 transition-all transform hover:scale-105"
               >
-                Devenir partenaire
+                Become a partner
               </a>
             </div>
           </div>
@@ -141,10 +179,10 @@ const ServicesPage: NextPage = () => {
         <section id="services-grid" className="py-8 sm:py-12 md:py-20">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-              Une Solution pour <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">Chaque Besoin</span>
+              A Solution for <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">Every Need</span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto">
-              De la conciergerie complète à l'optimisation des revenus, découvrez nos services qui transforment votre propriété en source de revenus optimale.
+              From complete concierge to revenue optimization, discover our services that transform your property into an optimal source of income.
             </p>
           </div>
           
@@ -186,10 +224,10 @@ const ServicesPage: NextPage = () => {
         <section className="py-8 sm:py-12 md:py-20">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-              Services <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">Complémentaires</span>
+              Additional <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">Services</span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto">
-              Des services additionnels pour une expérience complète et professionnelle.
+              Additional services for a complete and professional experience.
             </p>
           </div>
           
@@ -212,10 +250,10 @@ const ServicesPage: NextPage = () => {
         <section className="py-12 sm:py-16 md:py-20 lg:py-28">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-              Notre <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">Processus</span>
+              Our <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">Process</span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto">
-              Un processus simple et efficace en 4 étapes pour transformer votre propriété.
+              A simple and efficient 4-step process to transform your property.
             </p>
           </div>
           
@@ -223,7 +261,7 @@ const ServicesPage: NextPage = () => {
             <div className="relative order-2 md:order-1">
               <Image
                 src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Processus de gestion immobilière moderne"
+                alt="Modern property management process"
                 width={600}
                 height={500}
                 className="rounded-xl sm:rounded-2xl shadow-2xl w-full"
@@ -235,32 +273,32 @@ const ServicesPage: NextPage = () => {
               <div className="flex gap-3 sm:gap-4">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg flex-shrink-0">1</div>
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold mb-2">Consultation & Évaluation</h3>
-                  <p className="text-sm sm:text-base text-gray-400">Analyse complète de votre propriété et définition de la stratégie optimale.</p>
+                  <h3 className="text-lg sm:text-xl font-bold mb-2">Consultation & Evaluation</h3>
+                  <p className="text-sm sm:text-base text-gray-400">Complete analysis of your property and definition of the optimal strategy.</p>
                 </div>
               </div>
               
               <div className="flex gap-3 sm:gap-4">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg flex-shrink-0">2</div>
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold mb-2">Préparation & Optimisation</h3>
-                  <p className="text-sm sm:text-base text-gray-400">Mise en place des équipements, photographie professionnelle et création des annonces.</p>
+                  <h3 className="text-lg sm:text-xl font-bold mb-2">Preparation & Optimization</h3>
+                  <p className="text-sm sm:text-base text-gray-400">Equipment setup, professional photography and listing creation.</p>
                 </div>
               </div>
               
               <div className="flex gap-3 sm:gap-4">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg flex-shrink-0">3</div>
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold mb-2">Lancement & Promotion</h3>
-                  <p className="text-sm sm:text-base text-gray-400">Diffusion sur toutes les plateformes et début de la gestion complète.</p>
+                  <h3 className="text-lg sm:text-xl font-bold mb-2">Launch & Promotion</h3>
+                  <p className="text-sm sm:text-base text-gray-400">Distribution on all platforms and start of complete management.</p>
                 </div>
               </div>
               
               <div className="flex gap-3 sm:gap-4">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg flex-shrink-0">4</div>
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold mb-2">Gestion Continue</h3>
-                  <p className="text-sm sm:text-base text-gray-400">Suivi permanent, optimisation et reporting mensuel de vos performances.</p>
+                  <h3 className="text-lg sm:text-xl font-bold mb-2">Continuous Management</h3>
+                  <p className="text-sm sm:text-base text-gray-400">Permanent monitoring, optimization and monthly reporting of your performance.</p>
                 </div>
               </div>
             </div>
@@ -271,10 +309,10 @@ const ServicesPage: NextPage = () => {
         <section className="py-12 sm:py-16 md:py-20 lg:py-28">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-              L'Avantage <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">IB Signature</span>
+              The <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">IB Signature</span> Advantage
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto">
-              Découvrez pourquoi les propriétaires nous font confiance pour leur tranquillité d'esprit et leur rentabilité.
+              Discover why owners trust us for their peace of mind and profitability.
             </p>
           </div>
           
@@ -304,7 +342,7 @@ const ServicesPage: NextPage = () => {
                 ))}
               </div>
               <blockquote className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-gray-200 mb-6 sm:mb-8 leading-relaxed">
-                "IB Signature a transformé mon investissement immobilier. Mes revenus ont augmenté de 35% et je n'ai plus aucun souci de gestion."
+                "IB Signature transformed my real estate investment. My income increased by 35% and I no longer have any management worries."
               </blockquote>
               <div className="flex items-center justify-center gap-3 sm:gap-4">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base">
@@ -312,7 +350,7 @@ const ServicesPage: NextPage = () => {
                 </div>
                 <div className="text-left">
                   <div className="font-semibold text-sm sm:text-base">Mohamed Karim</div>
-                  <div className="text-xs sm:text-sm text-gray-400">Propriétaire à Casablanca</div>
+                  <div className="text-xs sm:text-sm text-gray-400">Property Owner in Casablanca</div>
                 </div>
               </div>
             </div>
@@ -323,24 +361,24 @@ const ServicesPage: NextPage = () => {
         <section className="text-center py-12 sm:py-16 md:py-20 lg:py-28">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-              Prêt à <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">maximiser</span> vos revenus ?
+              Ready to <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">maximize</span> your revenue?
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
-              Rejoignez nos propriétaires satisfaits et découvrez le potentiel inexploité de votre investissement immobilier.
+              Join our satisfied owners and discover the untapped potential of your real estate investment.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <a
                 href="/contact"
                 className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 lg:px-10 bg-gradient-to-r from-[#ff4d6d] to-pink-600 text-white text-sm sm:text-base font-bold rounded-full hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 transform hover:scale-105"
               >
-                Devenez Partenaire
+                Become a Partner
                 <ArrowRight className="w-5 h-5" />
               </a>
               <a
                 href="tel:+212661215698"
                 className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 lg:px-10 border border-gray-600 text-white text-sm sm:text-base font-semibold rounded-full hover:bg-white/5 transition-all transform hover:scale-105"
               >
-                Appelez-nous
+                Call us
                 <span className="text-pink-400">+212 661 215 698</span>
               </a>
             </div>
@@ -348,6 +386,27 @@ const ServicesPage: NextPage = () => {
         </section>
 
       </main>
+
+      {/* --- Footer --- */}
+      <footer className="border-t border-gray-800/50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex items-center gap-3">
+              <Home className="h-6 w-6 text-pink-500" />
+              <span className="text-xl font-bold">IB Signature</span>
+            </div>
+            <div className="flex gap-8">
+              <NavLink href="/">Home</NavLink>
+              <NavLink href="/about">About</NavLink>
+              <NavLink href="/services">Services</NavLink>
+              <NavLink href="/contact">Contact</NavLink>
+            </div>
+            <p className="text-sm text-gray-500">
+              © 2024 IB Signature. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
