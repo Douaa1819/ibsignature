@@ -4,6 +4,15 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import { Home, Award, BarChart2, CheckCircle, Users, Star, TrendingUp, Shield, Clock, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import HeroImage from '../../public/images/hero.png'
+import AboutImage from '../../public/images/about.png'
+import AirbnbLogo from '../../public/images/airbnb.png'
+import BookingLogo from '../../public/images/booking.png'
+import ExpediaLogo from '../../public/images/expedia.png'
+import VrboLogo from '../../public/images/vrbo.png'
+import AbritelLogo from '../../public/images/abritel.png'
+import GoogleLogo from '../../public/images/google.png'
+import SuperchLogo from '../../public/images/superch.png'
 
 // --- Composants ---
 
@@ -102,7 +111,7 @@ const AboutPage: NextPage = () => {
           transition={{ duration: 0.8 }}
         >
           <Image
-            src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+            src={HeroImage}
             alt="Luxurious modern home with coins representing investment returns"
             fill
             className="object-cover opacity-40"
@@ -219,71 +228,174 @@ const AboutPage: NextPage = () => {
 
         {/* --- Services Section --- */}
         <motion.section 
-          className="mb-12 sm:mb-16 md:mb-20 lg:mb-28"
+          className="mb-12 sm:mb-16 md:mb-20 lg:mb-28 relative"
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+          {/* Background decorative elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-1/4 -left-20 w-40 h-40 bg-pink-500/5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/4 -right-20 w-60 h-60 bg-pink-500/3 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="relative grid md:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
             <motion.div 
-              className="relative w-full h-64 sm:h-80 md:h-[400px] lg:h-[500px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl order-2 md:order-1"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              className="relative w-full h-64 sm:h-80 md:h-[400px] lg:h-[500px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl order-2 md:order-1 group"
+              whileHover={{ scale: 1.02, rotateY: 5 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <Image
-                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Contrat de gestion immobilière et clés"
+                src={AboutImage} alt="Contrat de gestion immobilière et clés"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-pink-500/10 group-hover:from-black/30 transition-all duration-500"></div>
+              
+              {/* Floating badge */}
+              <motion.div 
+                className="absolute top-4 left-4 bg-pink-500/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                ✨ Service Premium
+              </motion.div>
             </motion.div>
             
-            <div className="space-y-6 sm:space-y-8 order-1 md:order-2">
-              <div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
-                  Un service <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">complet</span>, de A à Z
-                </h2>
-                <p className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed mb-6 sm:mb-8">
-                  Nous offrons un service de conciergerie Airbnb complet pour maximiser la rentabilité 
-                  de votre investissement et garantir un séjour exceptionnel. De la réservation au départ, 
-                  en passant par l'accueil, le ménage et la maintenance, IB Signature prend en charge chaque étape.
-                </p>
-              </div>
+            <motion.div 
+              className="space-y-6 sm:space-y-8 order-1 md:order-2"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <motion.div variants={itemVariants}>
+                {/* Enhanced title with better typography */}
+                <div className="mb-6 sm:mb-8">
+                  <motion.div 
+                    className="inline-flex items-center gap-2 bg-pink-500/10 border border-pink-500/20 rounded-full px-4 py-2 text-pink-400 text-sm font-medium mb-4"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <Sparkles className="h-4 w-4" />
+                    Gestion Complète
+                  </motion.div>
+                  
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
+                    Un service{" "}
+                    <span className="relative">
+                      <span className="bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 bg-clip-text text-transparent">
+                        complet
+                      </span>
+                      <motion.div 
+                        className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-pink-400 to-pink-600 rounded-full"
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        transition={{ delay: 0.8, duration: 0.8 }}
+                      />
+                    </span>
+                    <br />
+                    <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-300 font-light">
+                      de A à Z
+                    </span>
+                  </h2>
+                </div>
+                
+                <motion.p 
+                  className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed mb-8 sm:mb-10"
+                  variants={itemVariants}
+                >
+                  Nous offrons un service de{" "}
+                  <span className="text-pink-400 font-semibold">conciergerie Airbnb complet</span>{" "}
+                  pour maximiser la rentabilité de votre investissement et garantir un séjour exceptionnel. 
+                  De la réservation au départ, en passant par l'accueil, le ménage et la maintenance, 
+                  <span className="text-white font-semibold"> IB Signature prend en charge chaque étape</span>.
+                </motion.p>
+              </motion.div>
               
-              <div className="space-y-3 sm:space-y-4">
+              <motion.div 
+                className="space-y-4 sm:space-y-5"
+                variants={staggerContainer}
+              >
                 <motion.div 
-                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-900/40 rounded-lg sm:rounded-xl border border-gray-800/50"
-                  whileHover={{ x: 5 }}
+                  className="group flex items-center gap-4 sm:gap-5 p-4 sm:p-5 bg-gradient-to-r from-gray-900/60 to-gray-800/40 rounded-xl sm:rounded-2xl border border-gray-700/50 hover:border-pink-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/10"
+                  variants={itemVariants}
+                  whileHover={{ x: 8, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-pink-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-pink-500" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500/20 to-pink-600/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-pink-500" />
                   </div>
-                  <span className="text-sm sm:text-base lg:text-lg">Technologie de pointe et expertise hôtelière</span>
+                  <div className="flex-1">
+                    <span className="text-sm sm:text-base lg:text-lg font-medium text-white group-hover:text-pink-100 transition-colors">
+                      Technologie de pointe et expertise hôtelière
+                    </span>
+                    <p className="text-xs sm:text-sm text-gray-400 mt-1">
+                      Solutions innovantes pour une gestion optimale
+                    </p>
+                  </div>
                 </motion.div>
                 
                 <motion.div 
-                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-900/40 rounded-lg sm:rounded-xl border border-gray-800/50"
-                  whileHover={{ x: 5 }}
+                  className="group flex items-center gap-4 sm:gap-5 p-4 sm:p-5 bg-gradient-to-r from-gray-900/60 to-gray-800/40 rounded-xl sm:rounded-2xl border border-gray-700/50 hover:border-pink-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/10"
+                  variants={itemVariants}
+                  whileHover={{ x: 8, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-pink-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Users className="h-4 w-4 sm:h-5 sm:w-5 text-pink-500" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500/20 to-pink-600/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <Users className="h-5 w-5 sm:h-6 sm:w-6 text-pink-500" />
                   </div>
-                  <span className="text-sm sm:text-base lg:text-lg">Expérience personnalisée pour propriétaires et voyageurs</span>
+                  <div className="flex-1">
+                    <span className="text-sm sm:text-base lg:text-lg font-medium text-white group-hover:text-pink-100 transition-colors">
+                      Expérience personnalisée pour propriétaires et voyageurs
+                    </span>
+                    <p className="text-xs sm:text-sm text-gray-400 mt-1">
+                      Service sur mesure adapté à chaque besoin
+                    </p>
+                  </div>
                 </motion.div>
                 
                 <motion.div 
-                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-900/40 rounded-lg sm:rounded-xl border border-gray-800/50"
-                  whileHover={{ x: 5 }}
+                  className="group flex items-center gap-4 sm:gap-5 p-4 sm:p-5 bg-gradient-to-r from-gray-900/60 to-gray-800/40 rounded-xl sm:rounded-2xl border border-gray-700/50 hover:border-pink-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/10"
+                  variants={itemVariants}
+                  whileHover={{ x: 8, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-pink-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-pink-500" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500/20 to-pink-600/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-pink-500" />
                   </div>
-                  <span className="text-sm sm:text-base lg:text-lg">Stratégies de location sur mesure pour chaque bien</span>
+                  <div className="flex-1">
+                    <span className="text-sm sm:text-base lg:text-lg font-medium text-white group-hover:text-pink-100 transition-colors">
+                      Stratégies de location sur mesure pour chaque bien
+                    </span>
+                    <p className="text-xs sm:text-sm text-gray-400 mt-1">
+                      Optimisation personnalisée de la rentabilité
+                    </p>
+                  </div>
                 </motion.div>
-              </div>
-            </div>
+              </motion.div>
+              
+              {/* Call to action button */}
+              <motion.div 
+                className="pt-4 sm:pt-6"
+                variants={itemVariants}
+              >
+                <motion.a 
+                  href="/services"
+                  className="inline-flex items-center gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-pink-500 to-pink-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 group"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span>Découvrir nos services</span>
+                  <motion.div
+                    className="group-hover:translate-x-1 transition-transform duration-300"
+                  >
+                    →
+                  </motion.div>
+                </motion.a>
+              </motion.div>
+            </motion.div>
           </div>
         </motion.section>
 
@@ -337,49 +449,238 @@ const AboutPage: NextPage = () => {
 
         {/* --- Partners Section --- */}
         <motion.section 
-          className="mb-20 md:mb-28 text-center"
+          className="mb-20 md:mb-28 text-center relative"
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">Partenaires</span> Privilégiés
-            </h2>
-            <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-              Nous diffusons vos annonces sur les plus grandes plateformes pour une visibilité maximale et des réservations optimales.
-            </p>
+          {/* Background decorative elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-pink-500/3 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-pink-500/2 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="max-w-7xl mx-auto relative">
+            <motion.div 
+              className="text-center mb-16"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <motion.div 
+                className="inline-flex items-center gap-2 bg-pink-500/10 border border-pink-500/20 rounded-full px-4 py-2 text-pink-400 text-sm font-medium mb-6"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+              >
+                <Star className="h-4 w-4" />
+                Partenariats Stratégiques
+              </motion.div>
+              
+              <motion.h2 
+                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight"
+                variants={itemVariants}
+              >
+                <span className="bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 bg-clip-text text-transparent">
+                  Partenaires
+                </span>{" "}
+                <span className="text-white">Privilégiés</span>
+              </motion.h2>
+              
+              <motion.p 
+                className="text-lg sm:text-xl text-gray-300 mb-4 max-w-3xl mx-auto leading-relaxed"
+                variants={itemVariants}
+              >
+                Nous diffusons vos annonces sur les{" "}
+                <span className="text-pink-400 font-semibold">plus grandes plateformes mondiales</span>{" "}
+                pour une visibilité maximale et des réservations optimales.
+              </motion.p>
+              
+              <motion.p 
+                className="text-base text-gray-400 max-w-2xl mx-auto"
+                variants={itemVariants}
+              >
+                Une présence multi-plateforme pour maximiser votre taux d'occupation
+              </motion.p>
+            </motion.div>
             
-            <div className="bg-gradient-to-r from-gray-900/40 to-gray-800/30 border border-gray-700/50 rounded-2xl p-8">
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-center">
-                <div className="flex justify-center items-center h-16 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                  <div className="w-24 h-12 bg-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
-                    Airbnb
+            {/* Enhanced Partners Grid */}
+            <motion.div 
+              className="bg-gradient-to-br from-gray-900/60 via-gray-800/40 to-gray-900/60 border border-gray-700/50 rounded-3xl p-8 sm:p-12 backdrop-blur-sm shadow-2xl"
+              variants={itemVariants}
+              whileHover={{ boxShadow: "0px 0px 40px rgba(236, 72, 153, 0.15)" }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.div 
+                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-6 sm:gap-8 lg:gap-6 items-center"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                {/* Airbnb */}
+                <motion.div 
+                  className="group flex justify-center items-center h-20 sm:h-24 p-4 bg-white rounded-2xl border border-gray-700/30 hover:border-pink-500/40 transition-all duration-500 hover:shadow-lg"
+                  variants={itemVariants}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    y: -8,
+                    boxShadow: "0px 10px 30px rgba(236, 72, 153, 0.2)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <Image
+                    src={AirbnbLogo}
+                    alt="Airbnb"
+                    width={100}
+                    height={40}
+                    className="object-contain transition-all duration-500 max-w-full h-auto"
+                  />
+                </motion.div>
+
+                {/* Booking.com */}
+                <motion.div 
+                  className="group flex justify-center items-center h-20 sm:h-24 p-4 bg-white rounded-2xl border border-gray-700/30 hover:border-pink-500/40 transition-all duration-500 hover:shadow-lg"
+                  variants={itemVariants}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    y: -8,
+                    boxShadow: "0px 10px 30px rgba(236, 72, 153, 0.2)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <Image
+                    src={BookingLogo}
+                    alt="Booking.com"
+                    width={100}
+                    height={40}
+                    className="object-contain transition-all duration-500 max-w-full h-auto"
+                  />
+                </motion.div>
+
+                {/* Expedia */}
+                <motion.div 
+                  className="group flex justify-center items-center h-20 sm:h-24 p-4 bg-white rounded-2xl border border-gray-700/30 hover:border-pink-500/40 transition-all duration-500 hover:shadow-lg"
+                  variants={itemVariants}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    y: -8,
+                    boxShadow: "0px 10px 30px rgba(236, 72, 153, 0.2)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <Image
+                    src={ExpediaLogo}
+                    alt="Expedia"
+                    width={100}
+                    height={40}
+                    className="object-contain transition-all duration-500 max-w-full h-auto"
+                  />
+                </motion.div>
+
+                {/* Vrbo */}
+                <motion.div 
+                  className="group flex justify-center items-center h-20 sm:h-24 p-4 bg-white rounded-2xl border border-gray-700/30 hover:border-pink-500/40 transition-all duration-500 hover:shadow-lg"
+                  variants={itemVariants}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    y: -8,
+                    boxShadow: "0px 10px 30px rgba(236, 72, 153, 0.2)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <Image
+                    src={VrboLogo}
+                    alt="Vrbo"
+                    width={100}
+                    height={40}
+                    className="object-contain transition-all duration-500 max-w-full h-auto"
+                  />
+                </motion.div>
+
+                {/* Abritel */}
+                <motion.div 
+                  className="group flex justify-center items-center h-20 sm:h-24 p-4 bg-white rounded-2xl border border-gray-700/30 hover:border-pink-500/40 transition-all duration-500 hover:shadow-lg"
+                  variants={itemVariants}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    y: -8,
+                    boxShadow: "0px 10px 30px rgba(236, 72, 153, 0.2)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <Image
+                    src={AbritelLogo}
+                    alt="Abritel"
+                    width={100}
+                    height={40}
+                    className="object-contain transition-all duration-500 max-w-full h-auto"
+                  />
+                </motion.div>
+
+                {/* Google */}
+                <motion.div 
+                  className="group flex justify-center items-center h-20 sm:h-24 p-4 bg-white rounded-2xl border border-gray-700/30 hover:border-pink-500/40 transition-all duration-500 hover:shadow-lg"
+                  variants={itemVariants}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    y: -8,
+                    boxShadow: "0px 10px 30px rgba(236, 72, 153, 0.2)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <Image
+                    src={GoogleLogo}
+                    alt="Google"
+                    width={100}
+                    height={40}
+                    className="object-contain transition-all duration-500 max-w-full h-auto"
+                  />
+                </motion.div>
+
+                {/* Superch */}
+                <motion.div 
+                  className="group flex justify-center items-center h-20 sm:h-24 p-4 bg-white rounded-2xl border border-gray-700/30 hover:border-pink-500/40 transition-all duration-500 hover:shadow-lg"
+                  variants={itemVariants}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    y: -8,
+                    boxShadow: "0px 10px 30px rgba(236, 72, 153, 0.2)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <Image
+                    src={SuperchLogo}
+                    alt="Superch"
+                    width={100}
+                    height={40}
+                    className="object-contain transition-all duration-500 max-w-full h-auto"
+                  />
+                </motion.div>
+              </motion.div>
+              
+              {/* Stats below partners */}
+              <motion.div 
+                className="mt-12 pt-8 border-t border-gray-700/50"
+                variants={itemVariants}
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                  <div>
+                    <p className="text-2xl sm:text-3xl font-bold text-pink-400 mb-1">7+</p>
+                    <p className="text-sm text-gray-400">Plateformes partenaires</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl sm:text-3xl font-bold text-pink-400 mb-1">100%</p>
+                    <p className="text-sm text-gray-400">Visibilité maximale</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl sm:text-3xl font-bold text-pink-400 mb-1">24/7</p>
+                    <p className="text-sm text-gray-400">Synchronisation automatique</p>
                   </div>
                 </div>
-                <div className="flex justify-center items-center h-16 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                  <div className="w-24 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
-                    Booking
-                  </div>
-                </div>
-                <div className="flex justify-center items-center h-16 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                  <div className="w-24 h-12 bg-yellow-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
-                    Expedia
-                  </div>
-                </div>
-                <div className="flex justify-center items-center h-16 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                  <div className="w-24 h-12 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
-                    Vrbo
-                  </div>
-                </div>
-                <div className="flex justify-center items-center h-16 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                  <div className="w-24 h-12 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
-                    Abritel
-                  </div>
-                </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </motion.section>
 
