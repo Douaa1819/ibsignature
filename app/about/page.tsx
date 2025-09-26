@@ -1,231 +1,154 @@
-"use client";
+import type { NextPage } from 'next';
+import Image from 'next/image';
+import { Home, Award, Briefcase, BarChart2 } from 'lucide-react';
 
-import { Navigation } from "@/components/navigation";
-import { Footer } from "@/components/footer";
-import { HeroSection } from "@/components/hero-section";
-import { SectionHeader } from "@/components/section-header";
-import { StatsSection } from "@/components/stats-section";
-import { CtaSection } from "@/components/cta-section";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Target, Users, Award, TrendingUp, Shield, Heart, Lightbulb, CheckCircle } from "lucide-react";
+// --- Composants ---
 
-const values = [
-  { icon: Target, title: "Excellence", description: "We strive for perfection in every aspect of property management, from guest experiences to owner satisfaction." },
-  { icon: Shield, title: "Trust", description: "Building lasting relationships through transparency, reliability, and consistent delivery of our promises." },
-  { icon: Heart, title: "Care", description: "We treat every property as if it were our own, ensuring meticulous attention to detail and genuine care." },
-  { icon: Lightbulb, title: "Innovation", description: "Leveraging cutting-edge technology and industry best practices to stay ahead of market trends." },
-];
+const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+  <a href={href} className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300">
+    {children}
+  </a>
+);
 
-const milestones = [
-  { year: "2019", title: "Company Founded", description: "Started with a vision to revolutionize short-term rental management with personalized service." },
-  { year: "2020", title: "First 50 Properties", description: "Reached our first milestone of managing 50 properties across major metropolitan areas." },
-  { year: "2021", title: "Technology Platform Launch", description: "Developed our proprietary management platform for enhanced efficiency and guest experience." },
-  { year: "2022", title: "Partnership Expansion", description: "Became preferred partners with Expedia and other major booking platforms." },
-  { year: "2023", title: "200+ Properties", description: "Expanded to manage over 200 properties with consistently high guest satisfaction ratings." },
-  { year: "2024", title: "Market Leadership", description: "Established as a leading property management company with proven 30% revenue increases." },
-];
+const PartnerLogo = ({ src, alt }: { src: string; alt: string }) => (
+  <div className="flex justify-center items-center h-16 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+    <Image src={src} alt={alt} width={120} height={40} objectFit="contain" />
+  </div>
+);
 
-const teamMembers = [
-  { name: "Sarah Johnson", role: "Founder & CEO", bio: "Former hospitality executive with 15+ years of experience in luxury hotel management and property operations.", image: "/professional-woman-ceo.png" },
-  { name: "Michael Chen", role: "Head of Operations", bio: "Operations specialist focused on streamlining processes and ensuring exceptional service delivery across all properties.", image: "/professional-operations-manager.png" },
-  { name: "Emma Rodriguez", role: "Guest Experience Director", bio: "Customer service expert dedicated to creating memorable experiences that drive positive reviews and repeat bookings.", image: "/professional-woman-customer-service-director-heads.jpg" },
-  { name: "David Thompson", role: "Revenue Optimization Manager", bio: "Data analyst and pricing strategist who maximizes property revenue through market analysis and dynamic pricing.", image: "/professional-man-revenue-manager-headshot.jpg" },
-];
+// --- Page Principale ---
 
-const achievements = [
-  { icon: Award, title: "Industry Recognition", description: "Winner of the 2023 Property Management Excellence Award for outstanding service quality." },
-  { icon: TrendingUp, title: "Proven Results", description: "Consistently deliver 30% average revenue increases for property owners within the first year." },
-  { icon: Users, title: "Client Satisfaction", description: "Maintain a 98% client retention rate with over 500 five-star reviews from property owners." },
-  { icon: CheckCircle, title: "Quality Assurance", description: "ISO 9001 certified processes ensuring consistent, high-quality service delivery." },
-];
-
-export default function AboutPage() {
+const AboutPage: NextPage = () => {
   return (
-    <div className="min-h-screen">
-      <Navigation />
+    <div className="bg-[#0d111e] text-white min-h-screen font-sans">
+      {/* --- Header --- */}
+      <header className="sticky top-0 bg-[#0d111e]/80 backdrop-blur-sm z-10 border-b border-gray-800/50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            <div className="flex items-center gap-2">
+              {/* Logo mis à jour */}
+              <Home className="h-6 w-6 text-pink-500" />
+              <span className="text-2xl font-bold">IB Signature</span>
+            </div>
+            <nav className="hidden md:flex items-center gap-8">
+              <NavLink href="#">Accueil</NavLink>
+              <NavLink href="#">Propriétés</NavLink>
+              <NavLink href="#">Services</NavLink>
+              <NavLink href="#">Contact</NavLink>
+            </nav>
+            <a
+              href="#"
+              className="px-5 py-2 bg-[#ff4d6d] text-white font-semibold rounded-full hover:bg-pink-600 transition-all duration-300 transform hover:scale-105"
+            >
+              Connexion
+            </a>
+          </div>
+        </div>
+      </header>
 
-      <main>
-        {/* Hero */}
-        <HeroSection
-          title="Redefining Property Management Excellence"
-          subtitle="We combine hospitality expertise with cutting-edge technology to create exceptional experiences for property owners and their guests."
-          primaryCta={{ text: "Partner With Us", href: "/contact" }}
-          secondaryCta={{ text: "View Our Services", href: "/services" }}
-          backgroundImage="/luxury-modern-apartment-interior-with-city-view.jpg"
-        />
+      {/* --- Main Content --- */}
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        
+        {/* --- Hero Section --- */}
+        <section className="relative w-full h-[500px] rounded-2xl overflow-hidden flex items-center justify-center text-center p-4">
+          <Image
+            src="/house-and-coins.jpg" // IMAGE : Maison avec des pièces
+            alt="Maximiser la rentabilité de l'investissement immobilier"
+            layout="fill"
+            objectFit="cover"
+            className="z-0 opacity-40"
+          />
+          <div className="absolute inset-0 bg-black/50 z-10"></div>
+          <div className="relative z-20 flex flex-col items-center gap-4 max-w-3xl">
+            <h1 className="text-4xl md:text-6xl font-bold">Votre partenaire pour la location courte et moyenne durée</h1>
+            <p className="text-lg text-gray-200">
+              Nous gérons tout, pour que vous n'ayez plus jamais à le faire.
+            </p>
+            <button className="mt-4 px-8 py-3 bg-[#ff4d6d] text-white font-semibold rounded-full hover:bg-pink-600 transition-transform transform hover:scale-105">
+              Découvrir nos services
+            </button>
+          </div>
+        </section>
 
-        {/* Mission & Vision */}
-        <section className="py-24 sm:py-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl lg:mx-0">
-              <SectionHeader
-                subtitle="Our Mission"
-                title="Maximizing Your Investment Potential"
-                description="We exist to transform property ownership into a truly passive income stream while delivering exceptional experiences that guests remember and recommend."
-                centered={false}
+        {/* --- Mission & Expertise Section --- */}
+        <section className="mt-20 md:mt-28 text-center">
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-10">
+            <div className="bg-gray-900/30 p-8 rounded-xl border border-gray-800/50">
+              <Award className="h-8 w-8 mx-auto mb-4 text-pink-500" />
+              <h3 className="text-2xl font-bold mb-2">Notre Expertise</h3>
+              <p className="text-gray-400">Gestion immobilière spécialisée dans la location de courte et moyenne durée.</p>
+            </div>
+            <div className="bg-gray-900/30 p-8 rounded-xl border border-gray-800/50">
+              <BarChart2 className="h-8 w-8 mx-auto mb-4 text-pink-500" />
+              <h3 className="text-2xl font-bold mb-2">Notre Mission</h3>
+              <p className="text-gray-400">Maximiser la rentabilité de l'investissement des propriétaires.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* --- Services Section --- */}
+        <section className="mt-20 md:mt-28 grid md:grid-cols-2 gap-12 items-center">
+          <div className="relative w-full h-80 md:h-[450px] rounded-2xl overflow-hidden shadow-lg order-last md:order-first">
+             <Image
+                src="/contract-signing.jpg" // IMAGE : Personnes signant un contrat
+                alt="Gestion complète de la location"
+                layout="fill"
+                objectFit="cover"
               />
-            </div>
-            <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-              <div className="rounded-2xl bg-muted/30 p-8 transition-transform duration-300 hover:-translate-y-1">
-                <h3 className="mb-4 text-2xl font-bold tracking-tight text-foreground">Our Mission</h3>
-                <p className="text-lg leading-8 text-muted-foreground">
-                  To revolutionize short-term rental management by combining personalized service with innovative
-                  technology, ensuring maximum profitability for property owners while creating unforgettable
-                  experiences for guests.
-                </p>
-              </div>
-              <div className="rounded-2xl bg-primary/5 p-8 transition-transform duration-300 hover:-translate-y-1">
-                <h3 className="mb-4 text-2xl font-bold tracking-tight text-foreground">Our Vision</h3>
-                <p className="text-lg leading-8 text-muted-foreground">
-                  To become the most trusted property management partner globally, setting new standards for service
-                  excellence and helping property owners achieve financial freedom through optimized rental income.
-                </p>
-              </div>
-            </div>
+          </div>
+          <div className="space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold">Un service complet de A à Z</h2>
+            <p className="text-gray-300 leading-relaxed">
+              Nous offrons un service de gestion complet type Airbnb pour maximiser la rentabilité de votre investissement et garantir un séjour exceptionnel à vos voyageurs. De la réservation au départ, en passant par l'accueil, le nettoyage et la maintenance, IB Signature prend en charge chaque étape.
+            </p>
+            <p className="text-gray-300 leading-relaxed">
+              Votre temps est précieux. Nous combinons le meilleur de la technologie avec notre savoir-faire pour créer une expérience haut de gamme et personnalisée pour nos propriétaires et leurs voyageurs.
+            </p>
           </div>
         </section>
 
-        {/* Stats */}
-        <StatsSection
-          stats={[
-            { value: "200+", label: "Properties Managed" },
-            { value: "30%", label: "Average Revenue Increase" },
-            { value: "98%", label: "Client Retention Rate" },
-            { value: "4.9", label: "Average Guest Rating" },
-          ]}
-        />
+        {/* --- Results Section --- */}
+        <section className="mt-20 md:mt-28 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold">Des résultats concrets</h2>
+          <div className="mt-8 max-w-md mx-auto bg-gray-900/50 border border-gray-700/50 p-8 rounded-2xl">
+            <p className="text-lg text-gray-300">Augmentation moyenne des revenus locatifs</p>
+            <p className="text-6xl font-bold text-white mt-2">+30%</p>
+          </div>
+          <p className="mt-6 max-w-3xl mx-auto text-gray-300 leading-relaxed">
+            En optimisant l'occupation des biens et grâce à une tarification dynamique, nos hôtes constatent une augmentation significative de leurs revenus.
+          </p>
+        </section>
 
-        {/* Values (accent icons) */}
-        <section className="py-24 sm:py-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <SectionHeader
-              subtitle="Our Values"
-              title="The Principles That Guide Everything We Do"
-              description="Our core values shape every interaction, decision, and service we provide to ensure exceptional outcomes for all stakeholders."
-            />
-            <div className="icons-highlight mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:gap-x-8 lg:gap-y-16">
-              {values.map((value, index) => (
-                <div key={index} className="relative pl-16 transition-transform duration-300 hover:-translate-y-0.5">
-                  <dt className="text-base font-semibold leading-7 text-foreground">
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary border border-[--color-highlight] transition-transform duration-300">
-                      <value.icon className="h-6 w-6" />
-                    </div>
-                    {value.title}
-                  </dt>
-                  <dd className="mt-2 text-base leading-7 text-muted-foreground">{value.description}</dd>
-                </div>
-              ))}
-            </div>
+        {/* --- Partners Section --- */}
+        <section className="mt-20 md:mt-28 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Partenaire privilégié de</h2>
+          <p className="text-gray-400 mb-12">Nous diffusons vos annonces sur les plus grandes plateformes pour une visibilité maximale.</p>
+          <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+            <PartnerLogo src="/logo-airbnb.svg" alt="Airbnb" />
+            <PartnerLogo src="/logo-booking.svg" alt="Booking.com" />
+            <PartnerLogo src="/logo-expedia.svg" alt="Expedia" />
+            <PartnerLogo src="/logo-vrbo.svg" alt="Vrbo" />
           </div>
         </section>
 
-        {/* Timeline */}
-        <section className="bg-muted/30 py-24 sm:py-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <SectionHeader
-              subtitle="Our Journey"
-              title="Building Excellence Since 2019"
-              description="From a small startup to an industry leader, our growth reflects our commitment to innovation and exceptional service."
-            />
-            <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:max-w-4xl">
-              <div className="relative">
-                {/* ligne centrale */}
-                <div className="absolute left-8 top-0 h-full w-px bg-border lg:left-1/2 lg:-translate-x-px" />
-                <div className="space-y-12">
-                  {milestones.map((milestone, index) => (
-                    <div key={index} className="relative flex items-center">
-                      {/* halo + badge année */}
-                      <div className="pointer-events-none absolute left-0 -top-2 h-16 w-16 rounded-full bg-[--color-highlight] opacity-10 blur-xl lg:left-1/2 lg:-translate-x-1/2" />
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-background border-4 border-[--color-highlight] shadow-sm lg:absolute lg:left-1/2 lg:-translate-x-1/2">
-                        <Badge variant="highlight" className="text-xs font-bold">{milestone.year}</Badge>
-                      </div>
-
-                      <div
-                        className={cnTimeline(index)}
-                      >
-                        <h3 className="text-lg font-semibold text-foreground">{milestone.title}</h3>
-                        <p className="mt-2 text-sm text-muted-foreground">{milestone.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Team */}
-        <section className="py-24 sm:py-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <SectionHeader
-              subtitle="Meet Our Team"
-              title="The Experts Behind Your Success"
-              description="Our experienced team combines hospitality expertise, technology innovation, and genuine care to deliver exceptional results."
-            />
-            <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 xl:grid-cols-4">
-              {teamMembers.map((member, index) => (
-                <Card key={index} className="overflow-hidden transition-transform duration-300 hover:-translate-y-1">
-                  <div className="aspect-square overflow-hidden">
-                    <img
-                      src={member.image || "/placeholder.svg"}
-                      alt={member.name}
-                      className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-lg font-semibold text-foreground">{member.name}</h3>
-                    <p className="mb-3 text-sm font-medium text-[--color-highlight]">{member.role}</p>
-                    <p className="text-sm text-muted-foreground">{member.bio}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Achievements */}
-        <section className="bg-muted/30 py-24 sm:py-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <SectionHeader
-              subtitle="Our Achievements"
-              title="Recognition and Results That Speak for Themselves"
-              description="Our commitment to excellence has earned us industry recognition and, more importantly, the trust of our clients."
-            />
-            <div className="icons-highlight mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-              {achievements.map((achievement, index) => (
-                <div key={index} className="relative pl-16 transition-transform duration-300 hover:-translate-y-0.5">
-                  <dt className="text-base font-semibold leading-7 text-foreground">
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary border border-[--color-highlight]">
-                      <achievement.icon className="h-6 w-6" />
-                    </div>
-                    {achievement.title}
-                  </dt>
-                  <dd className="mt-2 text-base leading-7 text-muted-foreground">{achievement.description}</dd>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <CtaSection
-          title="Ready to Experience the IB Signature Difference?"
-          description="Join our growing family of successful property owners and discover what personalized, professional management can do for your investment."
-          primaryCta={{ text: "Start Your Partnership", href: "/contact" }}
-          secondaryCta={{ text: "Explore Our Services", href: "/services" }}
-          variant="accent"
-        />
       </main>
 
-      <Footer />
+      {/* --- Footer --- */}
+      <footer className="border-t border-gray-800/50 mt-20 md:mt-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex gap-6">
+              <NavLink href="#">Accueil</NavLink>
+              <NavLink href="#">Propriétés</NavLink>
+              <NavLink href="#">Services</NavLink>
+              <NavLink href="#">Contact</NavLink>
+          </div>
+          <p className="text-sm text-gray-500">
+            © 2024 IB Signature. Tous droits réservés.
+          </p>
+        </div>
+      </footer>
     </div>
   );
-}
+};
 
-function cnTimeline(index: number) {
-  const leftSide = index % 2 === 0;
-  const side = leftSide ? "lg:pr-8 lg:text-right" : "lg:pl-8";
-  const align = leftSide ? "" : "lg:ml-auto";
-  return `ml-24 lg:ml-0 ${side} lg:w-1/2 ${align}`;
-}
+export default AboutPage;
