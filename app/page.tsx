@@ -1,82 +1,35 @@
 "use client";
 
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { HeroSection } from "@/components/hero-section"
-import { SectionHeader } from "@/components/section-header"
-import { StatsSection } from "@/components/stats-section"
-import { CtaSection } from "@/components/cta-section"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import Link from "next/link"
-import { Building2, Users, TrendingUp, Shield, Clock, Star } from "lucide-react"
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import { HeroSection } from "@/components/hero-section";
+import { SectionHeader } from "@/components/section-header";
+import { StatsSection } from "@/components/stats-section";
+import { CtaSection } from "@/components/cta-section";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
+import { Building2, Users, TrendingUp, Shield, Clock, Star } from "lucide-react";
 
 const services = [
-  {
-    icon: Building2,
-    title: "Airbnb Concierge",
-    description: "Complete property management from booking to departure, ensuring exceptional guest experiences.",
-  },
-  {
-    icon: Users,
-    title: "Guest Management",
-    description: "Professional guest relations, check-in coordination, and 24/7 support for seamless stays.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Revenue Optimization",
-    description: "Strategic pricing and occupancy optimization to maximize your rental income potential.",
-  },
-  {
-    icon: Shield,
-    title: "Property Protection",
-    description: "Comprehensive maintenance, cleaning, and security services to protect your investment.",
-  },
-]
+  { icon: Building2, title: "Airbnb Concierge", description: "Complete property management from booking to departure, ensuring exceptional guest experiences." },
+  { icon: Users, title: "Guest Management", description: "Professional guest relations, check-in coordination, and 24/7 support for seamless stays." },
+  { icon: TrendingUp, title: "Revenue Optimization", description: "Strategic pricing and occupancy optimization to maximize your rental income potential." },
+  { icon: Shield, title: "Property Protection", description: "Comprehensive maintenance, cleaning, and security services to protect your investment." },
+];
 
 const stats = [
-  {
-    value: "+30%",
-    label: "Average Revenue Increase",
-    description: "Through optimized occupancy management",
-  },
-  {
-    value: "500+",
-    label: "Properties Managed",
-    description: "Across premium locations",
-  },
-  {
-    value: "98%",
-    label: "Guest Satisfaction",
-    description: "Consistently high ratings",
-  },
-  {
-    value: "24/7",
-    label: "Support Available",
-    description: "Round-the-clock assistance",
-  },
-]
+  { value: "+30%", label: "Average Revenue Increase", description: "Through optimized occupancy management" },
+  { value: "500+", label: "Properties Managed", description: "Across premium locations" },
+  { value: "98%", label: "Guest Satisfaction", description: "Consistently high ratings" },
+  { value: "24/7", label: "Support Available", description: "Round-the-clock assistance" },
+];
 
 const testimonials = [
-  {
-    content:
-      "IB Signature transformed my property investment. Their professional management increased my revenue by 35% while I focus on other ventures.",
-    author: "Sarah Mitchell",
-    role: "Property Owner",
-  },
-  {
-    content:
-      "The level of service is exceptional. Every guest interaction is handled professionally, and my property is always in perfect condition.",
-    author: "David Chen",
-    role: "Real Estate Investor",
-  },
-  {
-    content:
-      "Working with IB Signature has been seamless. They handle everything from A to Z, and the results speak for themselves.",
-    author: "Maria Rodriguez",
-    role: "Property Owner",
-  },
-]
+  { content: "IB Signature transformed my property investment. Their professional management increased my revenue by 35% while I focus on other ventures.", author: "Sarah Mitchell", role: "Property Owner" },
+  { content: "The level of service is exceptional. Every guest interaction is handled professionally, and my property is always in perfect condition.", author: "David Chen", role: "Real Estate Investor" },
+  { content: "Working with IB Signature has been seamless. They handle everything from A to Z, and the results speak for themselves.", author: "Maria Rodriguez", role: "Property Owner" },
+];
 
 export default function HomePage() {
   return (
@@ -88,14 +41,8 @@ export default function HomePage() {
         <HeroSection
           title="Premium Property Management Excellence"
           subtitle="Expert property management specializing in short and medium-term rentals. Maximize your investment profitability with our comprehensive Airbnb-style management services."
-          primaryCta={{
-            text: "Become a Partner",
-            href: "/contact",
-          }}
-          secondaryCta={{
-            text: "Learn More",
-            href: "/about",
-          }}
+          primaryCta={{ text: "Become a Partner", href: "/contact" }}
+          secondaryCta={{ text: "Learn More", href: "/about" }}
           backgroundImage="/luxury-modern-apartment-interior-with-city-view.jpg"
         />
 
@@ -111,11 +58,13 @@ export default function HomePage() {
               description="From booking to departure, we handle every aspect of your short-term rental business with professional expertise and cutting-edge technology."
             />
             <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-              <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
+              {/* Toutes les icônes de ce bloc héritent de #FF385C */}
+              <dl className="icons-highlight grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
                 {services.map((service) => (
                   <div key={service.title} className="flex flex-col">
                     <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-foreground">
-                      <service.icon className="h-5 w-5 flex-none text-primary" aria-hidden="true" />
+                      {/* icône en accent */}
+                      <service.icon className="h-5 w-5 flex-none" aria-hidden="true" />
                       {service.title}
                     </dt>
                     <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-muted-foreground">
@@ -126,7 +75,7 @@ export default function HomePage() {
               </dl>
             </div>
             <div className="mt-16 flex justify-center">
-              <Button asChild size="lg">
+                 <Button asChild size="lg">
                 <Link href="/services">View All Services</Link>
               </Button>
             </div>
@@ -142,11 +91,13 @@ export default function HomePage() {
               description="We combine cutting-edge technology with hospitality expertise to create premium experiences for property owners and their guests."
             />
             <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-              <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+              {/* Toutes les icônes de ce bloc en accent */}
+              <dl className="icons-highlight grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
                 <div className="relative pl-16">
                   <dt className="text-base font-semibold leading-7 text-foreground">
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                      <Clock className="h-6 w-6 text-primary-foreground" aria-hidden="true" />
+                    {/* pastille claire + bord + icône accent */}
+                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary border border-[--color-highlight]">
+                      <Clock className="h-6 w-6" aria-hidden="true" />
                     </div>
                     Complete Management
                   </dt>
@@ -154,10 +105,11 @@ export default function HomePage() {
                     Your time is precious. We offer complete management so you don't have to worry about the details.
                   </dd>
                 </div>
+
                 <div className="relative pl-16">
                   <dt className="text-base font-semibold leading-7 text-foreground">
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                      <Star className="h-6 w-6 text-primary-foreground" aria-hidden="true" />
+                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary border border-[--color-highlight]">
+                      <Star className="h-6 w-6" aria-hidden="true" />
                     </div>
                     Premium Experience
                   </dt>
@@ -165,10 +117,11 @@ export default function HomePage() {
                     We create personalized, high-end experiences for both property owners and their guests.
                   </dd>
                 </div>
+
                 <div className="relative pl-16">
                   <dt className="text-base font-semibold leading-7 text-foreground">
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                      <TrendingUp className="h-6 w-6 text-primary-foreground" aria-hidden="true" />
+                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary border border-[--color-highlight]">
+                      <TrendingUp className="h-6 w-6" aria-hidden="true" />
                     </div>
                     Proven Results
                   </dt>
@@ -176,10 +129,11 @@ export default function HomePage() {
                     Our hosts see an average 30% increase in rental income through optimized property occupancy.
                   </dd>
                 </div>
+
                 <div className="relative pl-16">
                   <dt className="text-base font-semibold leading-7 text-foreground">
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                      <Shield className="h-6 w-6 text-primary-foreground" aria-hidden="true" />
+                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary border border-[--color-highlight]">
+                      <Shield className="h-6 w-6" aria-hidden="true" />
                     </div>
                     Tailored Strategies
                   </dt>
@@ -211,10 +165,7 @@ export default function HomePage() {
                       <figcaption className="mt-6 flex items-center gap-x-4">
                         <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
                           <span className="text-sm font-semibold text-foreground">
-                            {testimonial.author
-                              .split(" ")
-                              .map((n) => n[0])
-                              .join("")}
+                            {testimonial.author.split(" ").map((n) => n[0]).join("")}
                           </span>
                         </div>
                         <div>
@@ -234,19 +185,13 @@ export default function HomePage() {
         <CtaSection
           title="Ready to Maximize Your Property Revenue?"
           description="Join successful property owners who trust IB Signature to manage their investments and deliver exceptional guest experiences."
-          primaryCta={{
-            text: "Become a Partner",
-            href: "/contact",
-          }}
-          secondaryCta={{
-            text: "Learn About Our Services",
-            href: "/services",
-          }}
+          primaryCta={{ text: "Become a Partner", href: "/contact" }}
+          secondaryCta={{ text: "Learn About Our Services", href: "/services" }}
           variant="accent"
         />
       </main>
 
       <Footer />
     </div>
-  )
+  );
 }

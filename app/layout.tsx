@@ -2,6 +2,7 @@ import { Inter, Fira_Code } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Analytics } from '@vercel/analytics/react';
 import { Suspense } from 'react';
+import './globals.css'    ;
 
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
